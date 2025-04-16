@@ -5,6 +5,7 @@
 为了使用 java 工具进行分析词典，所以将当前项目使用 cmake 配置成可供 java 调用的 JNI。顺便学习一下 相关东西。
 
 其中 JNI  编写部分参考了 [marisa-java](https://github.com/ancel/marisa-java)
-<br>另外也有直接使用 java 实现的 darts，参考 [arts-clone-java](https://github.com/hiroshi-manabe/darts-clone-java)
+<br>另外也有直接使用 java 实现的 darts，参考 [darts-clone-java](https://github.com/hiroshi-manabe/darts-clone-java)
 
-> [!IMPORTANT] 当前只编译了 MAC 上的动态链接库。
+> [!IMPORTANT]
+> MAC 上的动态链接库编译是好使的。其他平台应该也没问题，小东西，没那么多需要兼容的。
