@@ -6,6 +6,13 @@ on:
   # push:
     # branches: [ main ]
 
+# 👇 全局设置默认 shell 为 bash
+# GitHub Actions 在 Windows runner 上默认使用 PowerShell 7 执行 run: 命令：
+# 在 run: 步骤中强制使用 bash（Windows runner 已预装 Git Bash）：
+defaults:
+  run:
+    shell: bash
+
 jobs:
 
   # =============== 1. 多平台并行构建 ===============
