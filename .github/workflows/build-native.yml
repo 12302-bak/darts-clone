@@ -91,14 +91,9 @@ jobs:
           # Windows
           mv native-libs/native-Windows-*/*.dll final-native/Windows/amd64/darts-java.dll
 
-      - name: Create unified zip
-        run: |
-          cd final-native
-          zip -r ../darts-java-native-all.zip .
-
       - name: Upload final artifact
         uses: actions/upload-artifact@v4
         with:
-          name: darts-java-native-all
-          path: darts-java-native-all.zip
+          name: native-All
+          path: final-native
           retention-days: 30
