@@ -34,11 +34,12 @@ list(REMOVE_ITEM SRC_LIST
 #  two cmake application，one of library ,and other one is executable
 add_library(darts-java SHARED ${SRC_LIST})
 
-# 设置输出名称为 libdarts-java.dylib（macOS 默认加 lib 前缀）
-# set_target_properties(darts-java PROPERTIES
-#    PREFIX "lib"
-#    OUTPUT_NAME "darts-java"
-#)
+# 显示设置输出名称（macOS 默认加 lib 前缀）
+if(WIN32)
+    set_target_properties(darts-java PROPERTIES PREFIX "")
+else()
+    set_target_properties(darts-java PROPERTIES PREFIX "lib")
+endif()
 
 # 可执行文件（可选）
 # add_executable(darts src/darts.cc)
