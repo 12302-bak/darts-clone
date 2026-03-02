@@ -7,6 +7,7 @@
 #include <darts.h>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 extern jlong get_handle_value(JNIEnv *env, jobject pthis, const char* class_name);
 extern void set_handle_value(JNIEnv *env, jobject pthis, const char* class_name, jlong handle_value);
