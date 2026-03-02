@@ -35,10 +35,10 @@ list(REMOVE_ITEM SRC_LIST
 add_library(darts-java SHARED ${SRC_LIST})
 
 # 设置输出名称为 libdarts-java.dylib（macOS 默认加 lib 前缀）
-set_target_properties(darts-java PROPERTIES
-    PREFIX "lib"
-    OUTPUT_NAME "darts-java"
-)
+# set_target_properties(darts-java PROPERTIES
+#    PREFIX "lib"
+#    OUTPUT_NAME "darts-java"
+#)
 
 # 可执行文件（可选）
 # add_executable(darts src/darts.cc)
