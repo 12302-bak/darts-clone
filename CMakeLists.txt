@@ -8,9 +8,9 @@ set(CMAKE_BUILD_TYPE Release)
 # set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
 message(STATUS "JAVA_HOME = $ENV{JAVA_HOME}")
+# actions 中每个平台都有 JAVA_HOME 环境变量，所以不会进入 if,仅记录。
 if(NOT DEFINED ENV{JAVA_HOME})
     find_package(JNI REQUIRED)
-    message(STATUS "JNI_INCLUDE_DIRS = ${JNI_INCLUDE_DIRS}")
     # https://cmake.org/cmake/help/latest/module/FindJNI.html
     include_directories(${PROJECT_SOURCE_DIR}/include ${JNI_INCLUDE_DIRS})
 else()
@@ -19,6 +19,8 @@ else()
         ${PROJECT_SOURCE_DIR}/include
         ${JAVA_HOME}/include
         ${JAVA_HOME}/include/darwin
+        ${JAVA_HOME}/include/linux
+        ${JAVA_HOME}/include/win32
     )
 endif()
 
