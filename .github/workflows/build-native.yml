@@ -1,0 +1,34 @@
+name: Build Native Libraries
+
+on:
+  # 手动触发（推荐）
+  workflow_dispatch:
+  # push:
+    # branches: [ main ]
+
+jobs:
+  build-macos:
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
+    runs-on: macos-15-intel # windows-2025
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create build directory
+        run: mkdir -p build
+
+      - name: Configure CMake
+        working-directory: build
+        run: cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build darts-java
+        working-directory: build
+        run: cmake --build ./ --config Release --target darts-java -j $(sysctl -n hw.ncpu)
+
+      - name: Upload dylib as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: darts-java-macos-x86_64
+          path: build/libdarts-java.dylib
+          retention-days: 30

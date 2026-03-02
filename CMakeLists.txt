@@ -3,16 +3,21 @@ cmake_minimum_required(VERSION 3.10)
 project(darts-clone)
 set(CMAKE_CXX_STANDARD 17)
 
-set(JAVA_HOME "/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home")
-# set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-set(LIBRARY_OUTPUT_PATH "/Users/stevenobelia/Documents/project_idea_test/darts-clone-java/src/main/resources/jp/darts/native/Mac/x86_64")
+# Release
+set(CMAKE_BUILD_TYPE Release)
+# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
-# 添加头文件路径（包括 JNI）
-include_directories(
-    ${PROJECT_SOURCE_DIR}/include
-    ${JAVA_HOME}/include
-    ${JAVA_HOME}/include/darwin   # 根据平台选择 win32、linux 或 darwin
-)
+if(NOT DEFINED ENV{JAVA_HOME})
+    find_package(JNI REQUIRED)
+    include_directories(${JNI_INCLUDE_DIRS})
+else()
+    set(JAVA_HOME $ENV{JAVA_HOME})  # JAVA_HOME_11_X64
+    include_directories(
+        ${PROJECT_SOURCE_DIR}/include
+        ${JAVA_HOME}/include
+        ${JAVA_HOME}/include/darwin
+    )
+endif()
 
 file(GLOB SRC_LIST "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc")
 list(REMOVE_ITEM SRC_LIST
@@ -23,7 +28,15 @@ list(REMOVE_ITEM SRC_LIST
 
 #  two cmake application，one of library ,and other one is executable
 add_library(darts-java SHARED ${SRC_LIST})
-add_executable(darts src/darts.cc)
+
+# 设置输出名称为 libdarts-java.dylib（macOS 默认加 lib 前缀）
+set_target_properties(darts-java PROPERTIES
+    PREFIX "lib"
+    OUTPUT_NAME "darts-java"
+)
+
+# 可执行文件（可选）
+# add_executable(darts src/darts.cc)
 
 # target_link_libraries("-framework CoreFoundation" "-framework SystemConfiguration")
 
