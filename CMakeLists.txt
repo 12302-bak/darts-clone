@@ -7,10 +7,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE Release)
 # set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
+message(STATUS "JAVA_HOME = $ENV{JAVA_HOME}")
 if(NOT DEFINED ENV{JAVA_HOME})
     find_package(JNI REQUIRED)
-    # https://cmake.org/cmake/help/latest/module/FindJNI.html
     message(STATUS "JNI_INCLUDE_DIRS = ${JNI_INCLUDE_DIRS}")
+    # https://cmake.org/cmake/help/latest/module/FindJNI.html
     include_directories(${PROJECT_SOURCE_DIR}/include ${JNI_INCLUDE_DIRS})
 else()
     set(JAVA_HOME $ENV{JAVA_HOME})
