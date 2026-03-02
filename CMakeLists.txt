@@ -9,6 +9,7 @@ set(CMAKE_BUILD_TYPE Release)
 
 if(NOT DEFINED ENV{JAVA_HOME})
     find_package(JNI REQUIRED)
+    # https://cmake.org/cmake/help/latest/module/FindJNI.html
     include_directories(${PROJECT_SOURCE_DIR}/include ${JNI_INCLUDE_DIRS})
 else()
     set(JAVA_HOME $ENV{JAVA_HOME})
