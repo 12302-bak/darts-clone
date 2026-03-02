@@ -9,9 +9,9 @@ set(CMAKE_BUILD_TYPE Release)
 
 if(NOT DEFINED ENV{JAVA_HOME})
     find_package(JNI REQUIRED)
-    include_directories(${JNI_INCLUDE_DIRS})
+    include_directories(${PROJECT_SOURCE_DIR}/include ${JNI_INCLUDE_DIRS})
 else()
-    set(JAVA_HOME $ENV{JAVA_HOME})  # JAVA_HOME_11_X64
+    set(JAVA_HOME $ENV{JAVA_HOME})
     include_directories(
         ${PROJECT_SOURCE_DIR}/include
         ${JAVA_HOME}/include
